@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from parsel import Selector
 
-def scrape_mega_sena_num()->list:
+def scrape_mega_sena_num_virada()->list:
     """
     Raspa os números da Mega Sena do site oficial.
 
@@ -17,11 +17,11 @@ def scrape_mega_sena_num()->list:
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     # Vá para a página da web
-    driver.get('https://loterias.caixa.gov.br/Paginas/Mega-Sena.aspx')
+    driver.get('https://www.caixa.gov.br/Paginas/mega-da-virada.aspx')
 
     # Espere até que os números da Mega Sena estejam presentes na página
     wait = WebDriverWait(driver, 10)
-    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'ul.numbers.megasena li')))
+    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'ul.resultado-loteria li')))
 
     # Obtenha o HTML da página
     html = driver.page_source
@@ -33,11 +33,11 @@ def scrape_mega_sena_num()->list:
     sel = Selector(text=html)
 
     # Extraia os números
-    numeros = sel.css('ul.numbers.megasena li::text').getall()
+    numeros = sel.css('ul.resultado-loteria li::text').getall()
 
     return numeros
 
-def scrape_concurso_mega_sena()->str:
+def scrape_concurso_mega_sena_virada()->str:
     """
     Raspa o título e o número do concurso da Mega Sena do site oficial.
 
@@ -48,11 +48,10 @@ def scrape_concurso_mega_sena()->str:
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     # Vá para a página da web
-    driver.get('https://loterias.caixa.gov.br/Paginas/Mega-Sena.aspx')
+    driver.get('https://www.caixa.gov.br/Paginas/mega-da-virada.aspx')
 
-    # Espere até que o número do concurso da Mega Sena esteja presente na página
     wait = WebDriverWait(driver, 10)
-    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div.title-bar.clearfix h2 span.ng-binding')))
+    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div.sorteio-loteria.clearfix div.nome-loteria.megasena.megasenadavirada p')))
 
     # Obtenha o HTML da página
     html = driver.page_source
@@ -64,8 +63,8 @@ def scrape_concurso_mega_sena()->str:
     sel = Selector(text=html)
 
     # Extraia o título e o número do concurso
-    titulo = sel.css('div.title-bar.clearfix h2::text').get()
-    concurso = sel.css('div.title-bar.clearfix h2 span.ng-binding::text').get()
+    titulo = sel.css('div.sorteio-loteria.clearfix div.nome-loteria.megasena.megasenadavirada p::text').getall()[0]
+    concurso = sel.css('div.sorteio-loteria.clearfix div.nome-loteria.megasena.megasenadavirada p.description::text').get()
 
     return f"{titulo} {concurso}"
 

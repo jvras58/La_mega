@@ -20,19 +20,13 @@ poetry add selenium webdriver_manager parsel
 
 O script contém duas funções principais:
 
+# mega-cena:
 - `scrape_mega_sena_num()`: Esta função retorna uma lista dos números da Mega Sena do último concurso.
 - `scrape_concurso_mega_sena()`: Esta função retorna o título e o número do último concurso da Mega Sena.
 
-Para usar essas funções, você pode importá-las em seu próprio script Python da seguinte maneira:
 
-```python
-from raspagem import scrape_mega_sena_num, scrape_concurso_mega_sena
-
-numeros = scrape_mega_sena_num()
-print(numeros)
-
-concurso = scrape_concurso_mega_sena()
-print(concurso)
-```
+# mega-cena-virada:
+- `scrape_mega_sena_num_virada()`: Esta função retorna uma lista dos números da Mega Sena do último concurso da mega cena da virada.
+- `scrape_concurso_mega_sena_virada()`: Esta função retorna o título e o número do último concurso da Mega Sena da virada.
 
 
