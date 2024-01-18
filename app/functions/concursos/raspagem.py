@@ -37,6 +37,7 @@ def scrape_mega_sena_num()->list:
 
     return numeros
 
+#TODO: TEM ALGO DE ERRADO QUE CONSEGUE OU NÃO PEGAR O CONCURSO E O TÍTULO
 def scrape_concurso_mega_sena()->str:
     """
     Raspa o título e o número do concurso da Mega Sena do site oficial.

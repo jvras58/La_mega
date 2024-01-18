@@ -1,6 +1,5 @@
-from mega_da_virada.raspagem import scrape_concurso_mega_sena_virada, scrape_mega_sena_num_virada
-from concursos.raspagem import scrape_mega_sena_num, scrape_concurso_mega_sena
-
+from functions.concursos.raspagem import scrape_concurso_mega_sena, scrape_mega_sena_num
+from functions.mega_da_virada.raspagem import scrape_concurso_mega_sena_virada, scrape_mega_sena_num_virada
 
 # mega sena
 concurso = scrape_concurso_mega_sena()
