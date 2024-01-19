@@ -1,7 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-from app.utils.base_model import Base
-
+from utils.base_model import Base
 
 class Concursos(Base):
     """
